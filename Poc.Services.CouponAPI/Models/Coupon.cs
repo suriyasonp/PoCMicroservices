@@ -1,14 +1,15 @@
-﻿namespace Poc.Services.CouponAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Poc.Services.CouponAPI.Models
 {
-    public class Coupon: CouponBase
-    {       
+    public class Coupon
+    {
+        [Key]
+        public int CouponId { get; set; }
+        [Required]
+        public string CouponCode { get; set; }
+        [Required]
         public double DiscountAmount { get; set; }
         public int MinAmount { get; set; }
-    }
-
-    public class CouponBase
-    {
-        public int CouponId { get; set; }
-        public string CouponCode { get; set; }
     }
 }
