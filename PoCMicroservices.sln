@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{2DD6B432-AE09-4557-BFD2-8D7DB1027171}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{AD682D68-5108-468F-870A-8B61327169B9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{DA1043D2-DB3A-4FA1-9BAC-50F6E4E38807}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{97149FE5-A08C-46F7-850B-77EFB34298B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.Services.CouponAPI", "Poc.Services.CouponAPI\Poc.Services.CouponAPI.csproj", "{078A4B70-17B5-4E60-ACFD-00F4FFF7DC8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{078A4B70-17B5-4E60-ACFD-00F4FFF7DC8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{078A4B70-17B5-4E60-ACFD-00F4FFF7DC8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{078A4B70-17B5-4E60-ACFD-00F4FFF7DC8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{078A4B70-17B5-4E60-ACFD-00F4FFF7DC8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{078A4B70-17B5-4E60-ACFD-00F4FFF7DC8D} = {97149FE5-A08C-46F7-850B-77EFB34298B1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD24A8ED-6E5F-4EFE-98DB-96BAEA241BB5}
+	EndGlobalSection
+EndGlobal
