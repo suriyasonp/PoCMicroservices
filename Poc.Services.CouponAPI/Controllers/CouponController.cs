@@ -120,5 +120,47 @@ namespace Poc.Services.CouponAPI.Controllers
             return _response;
         }
 
+        [HttpPut]
+        public ResponseDto PutCoupon([FromBody] CouponGetDto dto)
+        {
+            try
+            {
+                CouponModel obj = _mapper.Map<CouponModel>(dto);
+                _db.Coupons.Update(obj);
+                _db.SaveChanges();
+
+                _response.Result = _mapper.Map<CouponGetDto>(obj);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+                _response.TotalCount = 0;
+            }
+            return _response;
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public ResponseDto Delete(int id)
+        {
+            try
+            {
+                CouponModel obj = _db.Coupons.First(u => u.CouponId == id);
+                _db.Coupons.Remove(obj);
+                _db.SaveChanges();
+                _response.Result = _mapper.Map<CouponGetDto>(obj);
+                _response.Message = $"{obj.CouponId} has been removed";
+
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+                _response.TotalCount = 0;
+            }
+            return _response;
+        }
+
     }
 }
