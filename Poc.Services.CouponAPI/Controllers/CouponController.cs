@@ -10,61 +10,69 @@ namespace Poc.Services.CouponAPI.Controllers
     public class CouponController : ControllerBase
     {
         private readonly AppDbContext _db;
+        private ResponseDto _response { get; set; }
 
         public CouponController(AppDbContext db)
         {
             _db = db;
+            _response = new ResponseDto();
         }
 
         [HttpGet]
-        public object Get()
+        public ResponseDto Get()
         {
             try
             {
                 IEnumerable<Coupon> objList = _db.Coupons.ToList();
-
-                return objList;
+                _response.Result = objList;
+                _response.TotalCount = objList.Count();
             }
             catch (Exception ex)
             {
-
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+                _response.TotalCount = 0;
             }
-            return null;
+            return _response;
         }
 
         [HttpGet]
         [Route("{id:int}")]
-        public object Get(int id)
+        public ResponseDto Get(int id)
         {
             try
             {
                 Coupon objList = _db.Coupons.First(u => u.CouponId == id);
-
-                return objList;
+                _response.Result = objList;
+                _response.TotalCount = objList is not null ? 1 : 0;
             }
             catch (Exception ex)
             {
-
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+                _response.TotalCount = 0;
             }
-            return null;
+            return _response;
         }
 
         [HttpGet]
         [Route("{code}")]
-        public object Get(string code)
+        public ResponseDto Get(string code)
         {
             try
             {
                 IEnumerable<Coupon> objList = _db.Coupons
                                                 .Where(c => c.CouponCode.Contains(code)).ToList();
-
-                return objList;
+                _response.Result = objList;
+                _response.TotalCount = objList.Count();
             }
             catch (Exception ex)
             {
-
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+                _response.TotalCount = 0;
             }
-            return null;
+            return _response;
         }
 
     }
