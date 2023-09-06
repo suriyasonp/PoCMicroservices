@@ -5,12 +5,24 @@ using Poc.Services.CouponAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = builder.Configuration;
+var provider = configuration.GetValue("Provider", "SqlServer");
+
 // Add services to the container.
-builder.Services.AddDbContext<AppDbContext>(option =>
+builder.Services.AddDbContext<AppDbContext>(
+options => _ = provider switch
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-}
-);
+    "Sqlite" => options.UseSqlite(
+        configuration.GetConnectionString("SqliteConnection")
+       //x => x.MigrationsAssembly("SqliteMigrations")
+       ),
+
+    "SqlServer" => options.UseSqlServer(
+        configuration.GetConnectionString("SqlServerConnection"),
+        x => x.MigrationsAssembly("SqlServerMigrations")),
+
+    _ => throw new Exception($"Unsupported provider: {provider}")
+});
 
 // Add Auto Mapper Service
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();

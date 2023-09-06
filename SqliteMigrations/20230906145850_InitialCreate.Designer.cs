@@ -2,17 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Poc.Services.CouponAPI.Data;
 
 #nullable disable
 
-namespace Poc.Services.CouponAPI.Migrations
+namespace Poc.Services.CouponAPI.Migrations.SqliteMigrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230906145850_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace Poc.Services.CouponAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Poc.Services.CouponAPI.Models.Coupon", b =>
+            modelBuilder.Entity("Poc.Services.CouponAPI.Models.CouponModel", b =>
                 {
                     b.Property<int>("CouponId")
                         .ValueGeneratedOnAdd()
