@@ -66,10 +66,29 @@ namespace Poc.Services.CouponAPI.Controllers
                                                 .Where(c => c.CouponCode.Contains(code))
                                                 .Take(take)
                                                 .Skip(skip)
-                                                .OrderBy(c=> c.CouponCode)
+                                                .OrderBy(c => c.CouponCode)
                                                 .ToList();
                 _response.Result = _mapper.Map<IEnumerable<CouponDto>>(objList);
                 _response.TotalCount = objList.Count();
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+                _response.TotalCount = 0;
+            }
+            return _response;
+        }
+
+        [HttpGet]
+        [Route("GetByCode/{code}")]
+        public ResponseDto GetByCode(string code, int take = 50, int skip = 0)
+        {
+            try
+            {
+                Coupon obj = _db.Coupons.First(c => c.CouponCode.ToLower() == code.ToLower());
+                _response.Result = _mapper.Map<CouponDto>(obj);
+                _response.TotalCount = obj is not null ? 1 : 0;
             }
             catch (Exception ex)
             {
