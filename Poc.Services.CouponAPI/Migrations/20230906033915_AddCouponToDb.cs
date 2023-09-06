@@ -11,7 +11,7 @@ namespace Poc.Services.CouponAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Coupones",
+                name: "Coupons",
                 columns: table => new
                 {
                     CouponId = table.Column<int>(type: "int", nullable: false)
@@ -22,7 +22,7 @@ namespace Poc.Services.CouponAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Coupones", x => x.CouponId);
+                    table.PrimaryKey("PK_Coupons", x => x.CouponId);
                 });
         }
 
@@ -30,7 +30,7 @@ namespace Poc.Services.CouponAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Coupones");
+                name: "Coupons");
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Poc.Services.CouponAPI.Migrations
 
                     b.HasKey("CouponId");
 
-                    b.ToTable("Coupones");
+                    b.ToTable("Coupons");
                 });
 #pragma warning restore 612, 618
         }

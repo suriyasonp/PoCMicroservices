@@ -11,7 +11,7 @@ using Poc.Services.CouponAPI.Data;
 namespace Poc.Services.CouponAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230906033124_AddCouponToDb")]
+    [Migration("20230906033915_AddCouponToDb")]
     partial class AddCouponToDb
     {
         /// <inheritdoc />
@@ -44,7 +44,7 @@ namespace Poc.Services.CouponAPI.Migrations
 
                     b.HasKey("CouponId");
 
-                    b.ToTable("Coupones");
+                    b.ToTable("Coupons");
                 });
 #pragma warning restore 612, 618
         }
