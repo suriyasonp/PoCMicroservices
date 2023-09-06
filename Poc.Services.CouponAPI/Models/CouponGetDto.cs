@@ -1,6 +1,6 @@
 ﻿namespace Poc.Services.CouponAPI.Models
 {
-    public class CouponDto
+    public class CouponGetDto
     {
         public int CouponId { get; set; }
         public string CouponCode { get; set; }

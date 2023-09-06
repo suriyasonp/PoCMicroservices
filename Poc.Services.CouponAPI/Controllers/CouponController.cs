@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Poc.Services.CouponAPI.Data;
 using Poc.Services.CouponAPI.Models;
 
@@ -44,8 +45,8 @@ namespace Poc.Services.CouponAPI.Controllers
         {
             try
             {
-                Coupon obj = _db.Coupons.First(u => u.CouponId == id);
-                _response.Result = _mapper.Map<CouponDto>(obj);
+                CouponModel obj = _db.Coupons.First(u => u.CouponId == id);
+                _response.Result = _mapper.Map<CouponGetDto>(obj);
                 _response.TotalCount = obj is not null ? 1 : 0;
             }
             catch (Exception ex)
@@ -62,13 +63,13 @@ namespace Poc.Services.CouponAPI.Controllers
         {
             try
             {
-                IEnumerable<Coupon> objList = _db.Coupons
+                IEnumerable<CouponModel> objList = _db.Coupons
                                                 .Where(c => c.CouponCode.Contains(code))
                                                 .Take(take)
                                                 .Skip(skip)
                                                 .OrderBy(c => c.CouponCode)
                                                 .ToList();
-                _response.Result = _mapper.Map<IEnumerable<CouponDto>>(objList);
+                _response.Result = _mapper.Map<IEnumerable<CouponGetDto>>(objList);
                 _response.TotalCount = objList.Count();
             }
             catch (Exception ex)
@@ -86,9 +87,29 @@ namespace Poc.Services.CouponAPI.Controllers
         {
             try
             {
-                Coupon obj = _db.Coupons.First(c => c.CouponCode.ToLower() == code.ToLower());
-                _response.Result = _mapper.Map<CouponDto>(obj);
+                CouponModel obj = _db.Coupons.First(c => c.CouponCode.ToLower() == code.ToLower());
+                _response.Result = _mapper.Map<CouponGetDto>(obj);
                 _response.TotalCount = obj is not null ? 1 : 0;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+                _response.TotalCount = 0;
+            }
+            return _response;
+        }
+
+        [HttpPost]
+        public ResponseDto PostCoupon([FromBody] CouponPostDto couponPostDto)
+        {
+            try
+            {
+                CouponModel obj = _mapper.Map<CouponModel>(couponPostDto);
+                _db.Coupons.Add(obj);
+                _db.SaveChanges();
+
+                _response.Result = _mapper.Map<CouponGetDto>(obj);
             }
             catch (Exception ex)
             {

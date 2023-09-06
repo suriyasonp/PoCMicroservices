@@ -9,8 +9,9 @@ namespace Poc.Services.CouponAPI
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<CouponDto, Coupon>();
-                config.CreateMap<Coupon, CouponDto>();
+                config.CreateMap<CouponModel, CouponGetDto>().ReverseMap();
+                config.CreateMap<CouponModel, CouponPostDto>().ReverseMap();
+
             });
             return mappingConfig;
         }

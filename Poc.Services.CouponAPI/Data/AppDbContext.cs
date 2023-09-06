@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Poc.Services.CouponAPI.Models;
 
 namespace Poc.Services.CouponAPI.Data
@@ -9,13 +10,13 @@ namespace Poc.Services.CouponAPI.Data
         {
         }
 
-        public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<CouponModel> Coupons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);            
 
-            modelBuilder.Entity<Coupon>().HasData(new Coupon
+            modelBuilder.Entity<CouponModel>().HasData(new CouponModel
             {
                 CouponId = 1,
                 CouponCode = "10OFF",
@@ -23,7 +24,7 @@ namespace Poc.Services.CouponAPI.Data
                 MinAmount = 20,
             });
 
-            modelBuilder.Entity<Coupon>().HasData(new Coupon
+            modelBuilder.Entity<CouponModel>().HasData(new CouponModel
             {
                 CouponId = 2,
                 CouponCode = "20OFF",
