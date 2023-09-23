@@ -1,0 +1,9 @@
+{
+    "window.autoDetectColorScheme": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "diffEditor.codeLens": true,
+    "git.autofetch": true,
+    "workbench.sideBar.location": "left",
+    "workbench.colorTheme": "One Dark Pro Darker"
+}

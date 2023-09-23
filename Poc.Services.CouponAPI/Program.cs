@@ -13,13 +13,13 @@ builder.Services.AddDbContext<AppDbContext>(
 options => _ = provider switch
 {
     "Sqlite" => options.UseSqlite(
-        configuration.GetConnectionString("SqliteConnection")
-       //x => x.MigrationsAssembly("SqliteMigrations")
+        configuration.GetConnectionString("SqliteConnection"),
+       x => x.MigrationsAssembly("Poc.Services.CouponAPI")
        ),
 
     "SqlServer" => options.UseSqlServer(
         configuration.GetConnectionString("SqlServerConnection"),
-        x => x.MigrationsAssembly("SqlServerMigrations")),
+        x => x.MigrationsAssembly("Poc.Services.CouponAPI")),
 
     _ => throw new Exception($"Unsupported provider: {provider}")
 });
@@ -56,11 +56,19 @@ app.Run();
 
 void ApplyMigration()
 {
-    using var scope = app.Services.CreateScope();
-    var _db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-    if (_db.Database.GetPendingMigrations().Count() > 0)
+    try
     {
-        _db.Database.Migrate();
+        using var scope = app.Services.CreateScope();
+        var _db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var x = _db.Database.GetPendingMigrations().ToString();
+
+        if (_db.Database.GetPendingMigrations().Count() > 0)
+        {
+            _db.Database.Migrate();
+        }
+    }
+    catch (System.Exception ex)
+    {
+        throw ex;
     }
 }
